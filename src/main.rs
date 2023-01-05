@@ -22,13 +22,8 @@ fn main() {
 
     //dbg!(min, max, n);
     let mut randomNumber;
-    let mut counter = 0;
 
-    loop {
-        if counter == n {
-            break;
-        }
-        counter += 1;
+    for _ in 0..n {
         randomNumber = rand::thread_rng().gen_range(min..=max);
         println!("{}", randomNumber);
     }
