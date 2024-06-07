@@ -1,5 +1,5 @@
 #![allow(non_snake_case)]
-//Usage: RNG [min] [max] [number of rolls]
+//Usage: rng [min] [max] [number of rolls]
 
 use rand::Rng;
 use std::env;
@@ -8,12 +8,18 @@ use std::process::exit;
 fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() < 3 {
-        println!("Usage: RNG [min] [max] [number of rolls]");
-        exit(0);
+        println!("Usage: rng [min] [max] [number of rolls]");
+        exit(1);
     }
 
-    let min = args[1].trim().parse::<i32>().unwrap();
-    let max = args[2].trim().parse::<i32>().unwrap();
+    let min = match args[1].trim().parse::<i32>() {
+        Ok(min) => min,
+        Err(_) => {println!("Error: minimum must be a number"); exit(1)}
+    };
+    let max = match args[2].trim().parse::<i32>() {
+        Ok(max) => max,
+        Err(_) => {println!("Error: maximum must be a number"); exit(1)}
+    };
     let mut n = 1;
     if args.len() > 3 {
         n = args[3].trim().parse::<i32>().unwrap();
